@@ -23,13 +23,13 @@ if(isset($_POST['btn-login'])){
 		$row = mysqli_fetch_assoc($result);
         if ($row) {
 			if($row['typeuser'] == "superuser"){
-                header("Location:../report/report.php?Username=" . urlencode($Username));
+                header("Location:../report/SuperuserReport.php?Username=" . urlencode($Username));
             }
             else if($row["typeuser"] == "admin"){
-                header("Location:../report/report.php?Username=" . urlencode($Username));
+                header("Location:../report/AdminReport.php?Username=" . urlencode($Username));
             }
             else {
-                header("Location:../report/report.php?Username=" . urlencode($Username));
+                header("Location:../report/UserReport.php?Username=" . urlencode($Username));
             }
 		}
         else {
