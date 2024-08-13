@@ -1,10 +1,11 @@
 <?php
 if(isset($_POST['btn-login'])){
+    session_start();
     $msg = '';
     $flag = true;
     $secret_key = "@@darkday@@";
 
-    $Username = $_POST['username'];
+    $_SESSION['Username'] = $Username = $_POST['username'];
     $Password = $_POST['pass'];
     $Pass = md5($Password . $secret_key);
 
@@ -20,16 +21,15 @@ if(isset($_POST['btn-login'])){
         $query = "SELECT * FROM `users` WHERE `username` = '" . $Username . "' and `password` = '" . $Pass . "'";
         $result = runquery($conn, $query);
 		$row = mysqli_fetch_assoc($result);
-
         if ($row) {
 			if($row['typeuser'] == "superuser"){
-                header("Location:../Superuser.php");
+                header("Location:../report/report.php?Username=" . urlencode($Username));
             }
             else if($row["typeuser"] == "admin"){
-                header("Location:../Admin.php");
+                header("Location:../report/report.php?Username=" . urlencode($Username));
             }
             else {
-                header("Location:../User.php");
+                header("Location:../report/report.php?Username=" . urlencode($Username));
             }
 		}
         else {
